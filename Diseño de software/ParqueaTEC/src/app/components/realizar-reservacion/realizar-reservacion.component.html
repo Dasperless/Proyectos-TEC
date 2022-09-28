@@ -1,0 +1,64 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container-sm-flex mt-3 px-md-5">
+				<div *ngIf="['Operador'].includes(funcionario?.tipoPerfil); else bloqueElse">
+					<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 mx-md-5">
+						<div class="card w-100 shadow p-3 bg-body rounded" *ngFor="let parqueo of parqueos |parqueoFilter:funcionario?.parqueo">
+
+							<div *ngIf="parqueo._id===funcionario.parqueo">
+								<div class="ps-5 pe-3">				
+									<div class="d-lg-inline-flex w-100">
+										<div class="d-flex justify-content-center">
+											<img src="../../../assets/parking.png" alt="" class="rounded float-start img-fluid">
+										</div>	
+					
+										<div class="d-flex px-md-5 w-100 jus">
+											<div class="card-body ">
+												<h5 class="card-title">{{parqueo.NombreParqueo}}</h5>
+												<p class="card-text mt-3 text-secondary">{{parqueo.Ubicacion}}</p>
+												<p class="card-text text-secondary">{{parqueo.FormaAcceder}}</p>
+											</div>						  
+										</div>
+										<div class="d-flex align-items-end justify-content-center mb-2">
+											<button class="btn btn-primary" type="button" [routerLink]="'/reservar/'+idFuncionario+'/'+parqueo._id">Reservar</button>
+										</div>
+									</div>
+									
+								
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<ng-template #bloqueElse>
+					<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 mx-md-5">
+						<div class="card w-100 shadow p-3 bg-body rounded" *ngFor="let parqueo of parqueos">
+							<div class="ps-5 pe-3">				
+								<div class="d-lg-inline-flex w-100">
+									<div class="d-flex justify-content-center">
+										<img src="../../../assets/parking.png" alt="" class="rounded float-start img-fluid">
+									</div>	
+				
+									<div class="d-flex px-md-5 w-100 jus">
+										<div class="card-body ">
+											<h5 class="card-title">{{parqueo.NombreParqueo}}</h5>
+											<p class="card-text mt-3 text-secondary">{{parqueo.Ubicacion}}</p>
+											<p class="card-text text-secondary">{{parqueo.FormaAcceder}}</p>
+										</div>						  
+									</div>
+									<div class="d-flex align-items-end justify-content-center mb-2">
+										<button class="btn btn-primary" type="button" [routerLink]="'/reservar/'+idFuncionario+'/'+parqueo._id">Reservar</button>
+									</div>
+								</div>
+								
+							
+							</div>
+						</div>	
+					</div>
+				</ng-template>
+			
+		
+	</div>
+</app-sidebar>
+

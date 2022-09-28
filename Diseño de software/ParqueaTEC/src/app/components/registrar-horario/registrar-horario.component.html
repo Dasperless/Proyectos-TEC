@@ -1,0 +1,50 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+    <div class="d-flex justify-content-end mx-5">
+        <a [routerLink]="'/editarHorario/'+getIdUsuario()" class="text-black">
+            <i class="fa-solid fa-pen-to-square fs-3"></i>
+        </a>
+    </div>
+    <div class ="container px-5 mt-2">
+        <div class="row text-white text-center">
+            <div class="col mt-4">
+            </div>
+            <!-- Cabecera horario -->
+            <ng-template ngFor let-dia [ngForOf]="dias">
+                <div class=" shadow-sm col pt-2 pb-1 bg-dark ">
+                    {{dia}}
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Horario -->
+        <ng-template ngFor let-hora [ngForOf]="horas">
+            <div class ="row" >
+                <div class ="col">
+                    {{hora}}
+                </div>
+                <ng-template ngFor let-dia [ngForOf]="dias" let-idHorario="index">
+                    <div [id]="hora+'-'+dia" class ="col d-flex bg-light justify-content-center mt-1">
+                            <ng-template [ngIf]="marcarFranjaHoraria(dia, hora)" >
+                                <div class="container bg-secondary px-5 rounded-top" [title]="getInfoFranjaHoraria(dia,hora)" [id]="dia+'-'+getIndiceFranjaHoraria(dia,hora)"><br></div>
+                            </ng-template>
+                            <p></p>
+                         </div>                        
+                </ng-template>   
+
+            </div>
+            <div class="row border-bottom">
+                <div class ="col ">
+                </div>              
+                <ng-template ngFor let-dia [ngForOf]="dias" let-idHorario="index">
+                    <div [id]="hora+'-'+dia" class ="col d-flex bg-light justify-content-center ">
+                            <ng-template [ngIf]="marcarFranjaHoraria(dia, hora)">
+                            <div class="container bg-secondary px-5 rounded-bottom" [title]="getInfoFranjaHoraria(dia,hora)" [id]="dia+'-'+getIndiceFranjaHoraria(dia,hora)"><br></div>
+                            </ng-template>
+                            <p><p>
+                         </div>                        
+                </ng-template>                  
+            </div>
+        </ng-template>
+    </div>
+</app-sidebar>

@@ -1,0 +1,56 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="d-grid justify-content-md-end ">
+		<button class="btn btn-primary" routerLink="/registrarFuncionario">Agregar</button>
+	</div>
+	<div class="container mt-3">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col" *ngFor="let funcionario of funcionarios">
+				<div class="card shadow p-3 bg-body rounded" >
+					<div class="dropdown d-flex justify-content-end ">
+						<a href="#" class="d-flex justify-content-end text-dark text-end text-decoration-none "
+						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa-solid fa-ellipsis  pt-1 px-2"></i>
+						</a>
+
+						<!-- Menu de editar/eliminar -->
+						<ul class="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
+							<li><a class="dropdown-item" [routerLink]="'//editarFuncionario//'+funcionario._id">Editar funcionario</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>							
+							<li><a class="dropdown-item" href="" data-bs-toggle="modal" [attr.data-bs-target]="'#modalEliminar-'+funcionario._id">Eliminar funcionario</a></li>
+						</ul>
+
+						<!-- Modal -->
+						<div class="modal fade " [id]= "'modalEliminar-'+funcionario._id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Eliminar funcionario</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									¿Está seguro de eliminar a {{funcionario.nombre}}?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+									<button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarFuncionario(funcionario._id)">Eliminar</button>
+								</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="card-body text-center">
+
+						<img src="../../../assets/profile-picture.png" class="card-img-top w-50 mx-auto mb-3" alt="Foto de perfil funcionario">
+
+						<h6 class="card-title fs-6 text-center">{{funcionario.nombre}}</h6>
+						<button class="btn btn-primary " [routerLink]="'//perfilFuncionario/'+funcionario._id">Ver perfil</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</app-sidebar>

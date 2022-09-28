@@ -1,0 +1,22 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container mt-3">
+		<div  class="row row-cols-1 row-cols-md-3 g-2">
+		  <div *ngFor="let reserva of reservaciones | historialReservasFilter:funcionario?.nombre">
+			<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+				<div class="card-header">Reserva</div>
+				<div class="card-body card-text-center">
+				<h6 class="card-title fs-6 text-center"># Campo: {{reserva.numeroCampo}}</h6>
+				<h6 class="card-title fs-6 text-center">Estado: activo</h6>
+				<h6 class="card-title fs-6 text-center">Funcionario: {{reserva.funcionario}}</h6>
+				<h6 class="card-title fs-6 text-center">Fecha: {{reserva.fecha}}</h6>
+				<h6 class="card-title fs-6 text-center">Hora de entrada: {{reserva.horaEntrada}}</h6>
+				<h6 class="card-title fs-6 text-center">Hora de salida: {{reserva.horaSalida}}</h6>
+				<h6 class="card-title fs-6 text-center">Parqueo: {{reserva.parqueo}}</h6>
+				</div>
+			</div>
+
+		  </div>
+		</div>
+	  </div>
+</app-sidebar>

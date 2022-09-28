@@ -1,0 +1,80 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+    <div class="container">
+
+    </div>
+    <div class="d-flex d-grid gap-2  justify-content-end mx-5">
+        <a [routerLink]="'//horario'" class="text-dark" (click)="saveHorario()">
+            <i class="fa-solid fa-floppy-disk fs-4"></i>
+        </a>
+        <a [routerLink]="'//horario'" class="text-dark">
+            <i class="fa-solid fa-xmark fs-4"></i>
+        </a>
+    </div>
+    
+    <div class="row g-3 mt-2 mx-4" [formGroup]="formularioHorario">
+        <div class="col">
+            <select class="form-select" formControlName="dia" >
+                <ng-template ngFor let-dia [ngForOf]="dias" let-indice = "index " >
+                    <option [value]="dia" [selected]="indice === 0" >
+                        {{dia}}
+                    </option>
+                </ng-template>
+              </select>         
+        </div>
+        <div class="col">
+          <input type="time" class="form-control" formControlName="horaInicio">
+        </div>
+        <div class="col">
+            <input type="time" class="form-control" formControlName="horaFin">
+        </div>  
+        <div class="col">
+            <button class="btn btn-primary" type="submit" (click)="agregarFranjaHoraria()">Agregar</button>
+        </div>               
+    </div>    
+    <div class ="container px-5 mt-2">
+        <div class="row text-white text-center">
+            <div class="col mt-4">
+            </div>
+            <!-- Cabecera horario -->
+            <ng-template ngFor let-dia [ngForOf]="dias">
+                <div class=" shadow-sm col pt-2 pb-1 bg-dark ">
+                    {{dia}}
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Horario -->
+        <ng-template ngFor let-hora [ngForOf]="horas">
+            <div class ="row" >
+                <div class ="col">
+                    {{hora}}
+                </div>
+                <ng-template ngFor let-dia [ngForOf]="dias" let-idHorario="index">
+                    <div [id]="hora+'-'+dia" class ="col d-flex bg-light justify-content-center mt-1">
+                            <ng-template [ngIf]="marcarFranjaHoraria(dia, hora)" >
+                                <div class="d-inline-flex flex-fill" [attr.name]="dia+'-'+idHorario+'-'+getIndiceFranjaHoraria(dia,hora)">
+                                    <button type="button" class="btn-close" aria-label="Close" (click)="eliminarFranjaHoraria(dia+'-'+idHorario+'-'+getIndiceFranjaHoraria(dia,hora))"></button>
+                                    <div class="container bg-secondary px-5 rounded-top" [title]="getInfoFranjaHoraria(dia,hora)"><br></div>
+                                </div>
+                            </ng-template>
+                            <p></p>
+                         </div>                        
+                </ng-template>   
+
+            </div>
+            <div class="row border-bottom">
+                <div class ="col ">
+                </div>              
+                <ng-template ngFor let-dia [ngForOf]="dias" let-idHorario="index">
+                    <div [id]="hora+'-'+dia" class ="col d-flex bg-light justify-content-center"  >
+                            <ng-template [ngIf]="marcarFranjaHoraria(dia, hora)">
+                            <div class="container bg-secondary px-5 rounded-bottom" [title]="getInfoFranjaHoraria(dia,hora)" [attr.name]="dia+'-'+idHorario+'-'+getIndiceFranjaHoraria(dia,hora)" ><br></div>
+                            </ng-template>
+                            <p><p>
+                         </div>                        
+                </ng-template>                  
+            </div>
+        </ng-template>
+    </div>
+</app-sidebar>

@@ -1,0 +1,25 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="d-grid justify-content-md-start ms-4 mt-5">
+		<input [(ngModel)]="searchId" type="number" class="form-control" placeholder="Ingrese la identificación">
+	</div>
+	<div class="container mt-3">
+		<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+			<div class="col" *ngFor="let funcionario of funcionarios | funcionarioFilter:searchId">
+				<div class="card shadow p-3 bg-body rounded">
+					<div class="dropdown d-flex justify-content-end ">
+					</div>
+					<div class="card-body text-center">
+
+						<img src="../../../assets/profile-picture.png" class="card-img-top w-50 mx-auto mb-3"
+							alt="Foto de perfil funcionario">
+
+						<h6 class="card-title fs-6 text-center">{{funcionario.nombre}}</h6>
+						<button class="btn btn-primary " [routerLink]="'//perfilFuncionario/'+funcionario._id">Ver
+							perfil</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</app-sidebar>

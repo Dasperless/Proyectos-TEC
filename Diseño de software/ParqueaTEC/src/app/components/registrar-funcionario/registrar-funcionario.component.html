@@ -1,0 +1,254 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="d-flex container justify-content-center w-50">
+		<div class="d-flex align-items-center justify-content-center">
+			<div class="border p-4 rounded shadow bg-white rounded">
+				<div class="row justify-content-center">
+						<form [formGroup]="registerForm" (ngSubmit)="submit()">
+							<!-- Nombre -->
+							<div class="form-outline input-group-sm">
+								<label class="form-label" for="nombreCompleto">Nombre Completo</label>
+								<input formControlName="nombre" type="text" id="nombreCompleto" class="form-control" placeholder="Nombre Completo" ngModel required/>
+							</div>
+							<!-- Identificación -->
+							<div class="form-outline input-group-sm">
+								<label class="form-label" for="identificación">Identificación</label>
+								<input formControlName="identificacion" type="number" id="identificación" class="form-control" placeholder="Identificación" />
+							</div>
+				
+							<div class="row mb-3 align-items-center">
+								<div class="form-outline input-group-sm">
+									<label class="form-label" for="tipoperfil">Tipo Perfil</label>
+	
+									<!-- Select para registrar -->
+									<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditarTipoPerfil">
+										<select formControlName="tipoPerfil" class="form-select" id="tipoPerfil" #listaPerfil [ngModel]="tipoPerfil[0]" >
+											<option value="Funcionario">Funcionario</option>
+											<option value="Jefatura">Jefatura</option>
+											<option value="Operador">Operador</option>
+											<option value="Administrativo" selected>Administrativo</option>
+										</select>
+										<div *ngIf="listaPerfil.selectedIndex===listaPerfil.options.length-2; else elseBlock">
+										
+											<div class="col">
+												<!-- Parqueos -->
+												<div class="form-outline input-group-sm">
+													<label class="form-label" for="parqueo">Parqueos</label>
+				
+													<!-- Select para registrar -->
+													<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditar">
+														<select formControlName="parqueo" class="form-select" id="parqueo" [ngModel]="parqueos[0]._id" >
+															<option 
+																*ngFor="let parqueo of parqueos" 
+																[value] = "parqueo._id"
+															>
+																{{parqueo.NombreParqueo}}
+															</option>
+														</select>
+													</ng-template>
+				
+													<!-- Select para editar -->
+													<ng-template #selectEditar>
+														<select formControlName="parqueo" class="form-select" id="parqueo">
+															<option 
+																*ngFor="let parqueo of parqueos" 
+																[value] = "parqueo._id"
+															>
+																{{parqueo.NombreParqueo}}
+															</option>
+														</select>
+													</ng-template>
+												</div>
+											</div>
+									  </div>
+									  <ng-template #elseBlock>
+										<div class="col">
+											<!-- Escuela -->
+											<div class="form-outline input-group-sm">
+												<label class="form-label" for="escuela">Escuela</label>
+			
+												<!-- Select para registrar -->
+												<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditar">
+													<select formControlName="escuela" class="form-select" id="escuela" [ngModel]="escuelas[0]._id" >
+														<option 
+															*ngFor="let escuela of escuelas" 
+															[value] = "escuela._id"
+														>
+															{{escuela.codigo + " \t-\t "+ escuela.nombre}}
+														</option>
+													</select>
+												</ng-template>
+			
+												<!-- Select para editar -->
+												<ng-template #selectEditar>
+													<select formControlName="escuela" class="form-select" id="escuela" [ngModel]="selectedEscuela" >
+														<option 
+															*ngFor="let escuela of escuelas" 
+															[value] = "escuela._id"
+														>
+															{{escuela.codigo + " \t-\t "+ escuela.nombre}}
+														</option>
+													</select>
+												</ng-template>
+											</div>
+										</div>
+
+									   </ng-template>
+									</ng-template>
+				
+	
+									<!-- Select para editar -->
+									<ng-template #selectEditarTipoPerfil>
+										<select formControlName="tipoPerfil" class="form-select" id="tipoperfil"  #listaPerfil [ngModel]="tipoPerfil[0]">
+											<option value="Funcionario">Funcionario</option>
+											<option value="Jefatura">Jefatura</option>
+											<option value="Operador">Operador</option>
+											<option value="Administrativo" selected>Administrativo</option>
+										</select>
+										<div *ngIf="listaPerfil.selectedIndex===listaPerfil.options.length-2; else elseBlock">
+										
+											<div class="col">
+												<!-- Parqueos -->
+												<div class="form-outline input-group-sm">
+													<label class="form-label" for="parqueo">Parqueos</label>
+				
+													<!-- Select para registrar -->
+													<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditar">
+														<select formControlName="parqueo" class="form-select" id="parqueo" [ngModel]="parqueos[0]._id" >
+															<option 
+																*ngFor="let parqueo of parqueos" 
+																[value] = "parqueo._id"
+															>
+																{{parqueo.NombreParqueo}}
+															</option>
+														</select>
+													</ng-template>
+				
+													<!-- Select para editar -->
+													<ng-template #selectEditar>
+														<select formControlName="parqueo" class="form-select" id="parqueo">
+															<option 
+																*ngFor="let parqueo of parqueos" 
+																[value] = "parqueo._id"
+															>
+																{{parqueo.NombreParqueo}}
+															</option>
+														</select>
+													</ng-template>
+												</div>
+											</div>
+									  </div>
+									</ng-template>
+									<ng-template #elseBlock>
+										<div class="col">
+											<!-- Escuela -->
+											<div class="form-outline input-group-sm">
+												<label class="form-label" for="escuela">Escuela</label>
+			
+												<!-- Select para registrar -->
+												<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditar">
+													<select formControlName="escuela" class="form-select" id="escuela" [ngModel]="escuelas[0]._id" >
+														<option 
+															*ngFor="let escuela of escuelas" 
+															[value] = "escuela._id"
+														>
+															{{escuela.codigo + " \t-\t "+ escuela.nombre}}
+														</option>
+													</select>
+												</ng-template>
+			
+												<!-- Select para editar -->
+												<ng-template #selectEditar>
+													<select formControlName="escuela" class="form-select" id="escuela" [ngModel]="selectedEscuela" >
+														<option 
+															*ngFor="let escuela of escuelas" 
+															[value] = "escuela._id"
+														>
+															{{escuela.codigo + " \t-\t "+ escuela.nombre}}
+														</option>
+													</select>
+												</ng-template>
+											</div>
+										</div>
+
+									   </ng-template>
+								</div>
+								
+								<div class="col">
+									<!-- Tipo Funcionario -->
+									<div class="form-outline input-group-sm">
+										<label class="form-label" for="tipoFuncionario">Tipo Funcionario</label>
+	
+										<!-- Select para registrar -->
+										<ng-template [ngIf]="isRegister()" [ngIfElse]="selectEditarTipoFuncionario">
+											<select formControlName="tipoFuncionario" class="form-select" id="tipoFuncionario" [ngModel]="tipoFuncionario[0]" >
+												<option value="Docente">Docente</option>
+												<option value="Administrativo" selected>Administrativo</option>
+											</select>
+										</ng-template>
+	
+										<!-- Select para editar -->
+										<ng-template #selectEditarTipoFuncionario>
+											<select formControlName="tipoFuncionario" class="form-select" id="tipoFuncionario" [ngModel]="selectedTipoFuncionario" >
+												<option value="Docente">Docente</option>
+												<option value="Administrativo" selected>Administrativo</option>
+											</select>
+										</ng-template>
+									</div>
+								</div>			
+							</div>
+
+							<div class="row">
+								<div class="col-auto">
+									<div class="form-outline input-group-sm">
+										<!-- Teléfono -->
+										<label class="form-label" for="telefono">Telefono</label>
+										<input formControlName="telefono" type="tel" id="telefono" class="form-control" placeholder="Telefono"/>
+									</div>
+								</div>
+								<div class="col-auto mt-4">
+									<!-- Discapacidad -->
+										<div class="form-outline">
+											<input formControlName="discapacidad" class="form-check-input me-2" type="checkbox"  id="discapacidad" checked />
+											<label class="form-check-label" for="discapacidad"> Discapacidad </label>
+										</div>
+								</div>	
+							</div>
+				
+							<!-- Correo -->
+							<div class="form-outline mb-2 input-group-sm">
+								<label class="form-label" for="correo">Correo</label>
+								<input formControlName="correo" type="email" id="correo" class="form-control" placeholder="Correo"/>
+							</div>
+						
+							<!-- Correo alterno -->
+							<div class="form-outline mb-2 input-group-sm">
+								<label class="form-label" for="correoAlterno">Correo alterno</label>
+								<input formControlName="correoAlterno" type="email" id="correoAlterno" class="form-control" placeholder="Correo alterno" />
+							</div>
+						
+							<!-- Contraseña -->
+							<div class="form-outline mb-2 input-group-sm">
+								<label class="form-label" for="contraseña">Contraseña</label>
+								<input formControlName="contraseña" type="password" id="contraseña" class="form-control" placeholder="Contraseña"/>
+							</div>
+							<!-- Boton de registro -->
+							
+							<ng-template [ngIf]="isRegister()" [ngIfElse]="editarFuncionario">
+							<div class="d-grid gap-2 col-4 mx-auto">
+									<button type="submit" class="btn btn-primary btn-block">Registrar</button>
+	
+								</div>
+							</ng-template>
+							<ng-template #editarFuncionario>
+								<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+									<button type="button" routerLink="//visualizarFuncionarios" class="btn btn-secondary btn-block ">Cancelar</button>
+									<button type="submit" class="btn btn-primary btn-block">Guardar</button>
+								</div>
+							</ng-template>
+						</form>	
+				</div>
+			</div>
+		</div>
+	</div>
+</app-sidebar>

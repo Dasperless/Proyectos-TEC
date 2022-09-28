@@ -1,0 +1,36 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+<div class="d-flex align-items-center justify-content-center mt-5 ">
+    <div class ="border p-4 rounded shadow bg-white rounded w-50">
+        <div class="row justify-content-center w-100">
+         
+                <div class="row mb-2 align-items-center">
+                <div class="col">
+                <div class="form-outline input-group-lg">
+                    <label class="form-label" for="NumeroPlaca">Numero de Placa</label>
+                    <input name="Codigo" FormControlName="Codigo" type="text" id="Codigo" class="form-control" placeholder="Numero de placa ej: BRT-8346 "  [(ngModel)]="Codigo"/>
+                </div>
+            </div>
+            </div>
+            <div class="row mb-2 align-items-center">
+                <div class ="col">
+                <div class="form-outline input-group-lg">
+                    
+                        <div class="d-grid gap-2 col-8 mx-auto mt-4">
+                            <button type="button" routerLink="//placas/{{id}}" class="btn btn-primary">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                    <div class ="col">
+                        <div class="d-grid gap-2 col-8 mx-auto mt-4">
+                            <button type="buttom"  (click)="submit(id,oldCodigo,Codigo)" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        
+    </div>
+</div>
+</app-sidebar>

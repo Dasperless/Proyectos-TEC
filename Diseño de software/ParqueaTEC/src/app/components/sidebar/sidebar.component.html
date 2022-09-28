@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="row  ">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark ">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white" >
+                <!-- Cerrar sesión -->
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
+                            class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1 fs-6 text-wrap">{{usuario?.nombre}}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" type="button" (click)="logout()">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+
+
+                <!-- Menu Admin-->
+                <ul  class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start "
+                    id="menu">
+                    <ng-template [ngIf]="!['Administrativo','Operador'].includes(usuario?.tipoPerfil)">
+                        <li  class="nav-item ">
+                            <a routerLink="/inicio" class="nav-link align-middle px-0 link-light">
+                                <i class="fa-solid fa-house"></i>
+                                <span class="ms-2 d-none d-sm-inline ">Inicio</span>
+                            </a>
+                        </li>
+                    </ng-template>
+                    <li class="nav-item">
+                        <a routerLink="/realizarReservacion" class="nav-link align-middle px-0 link-light">
+                            <i class="fa-solid fa-car"></i>
+                            <span class="ms-2 d-none d-sm-inline ">Relizar reservación</span>
+                        </a>
+                    </li>
+                    <ng-template [ngIf]="!['Administrativo','Operador'].includes(usuario?.tipoPerfil)">
+                        <li  class="nav-item">
+                            <a [routerLink]="'/placas/'+usuario?._id" class="nav-link align-middle px-0 link-light">
+                                <i class="fa-solid fa-rectangle-list"></i>
+                                <span class="ms-2 d-none d-sm-inline">Placas</span>
+                            </a>
+                        </li> 
+                    </ng-template>
+                    <ng-template [ngIf]="!['Administrativo','Operador'].includes(usuario?.tipoPerfil)">
+                        <li class="nav-item">
+                            <a routerLink="/horario" class="nav-link align-middle px-0 link-light">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span class="ms-2 d-none d-sm-inline">Horarios</span>
+                            </a>
+                        </li>                             
+                    </ng-template>
+                    
+                    <ng-template  [ngIf]="['Administrativo'].includes(usuario?.tipoPerfil)">
+                        <li class="nav-item ">
+                            <a routerLink="/visualizarFuncionarios" class="nav-link align-middle px-0 link-light">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="ms-2 d-none d-sm-inline ">Funcionarios</span>
+                            </a>
+                        </li>
+                    </ng-template>
+
+                    <ng-template  [ngIf]="['Administrativo'].includes(usuario?.tipoPerfil)">
+                        <li class="nav-item">
+                            <a routerLink="/parqueos" class="nav-link align-middle px-0 link-light">
+                                <i class="fa-solid fa-square-parking"></i>
+                                <span class="ms-2 d-none d-sm-inline ">Parqueos</span>
+                            </a>
+                        </li>
+                    </ng-template>
+                    <ng-template [ngIf]="['Operador'].includes(usuario?.tipoPerfil)">
+                        <li>
+                            <a routerLink="/visualizarReservas" class="nav-link px-0 link-light">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="ms-2 d-none d-sm-inline">Reservas</span>
+                            </a>
+                        </li>
+                    </ng-template>
+                    <ng-template [ngIf]="['Administrativo', 'Jefatura'].includes(usuario?.tipoPerfil)">
+                        <li >
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle link-light">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <span class="ms-2 d-none d-sm-inline">Informes y estadísticas</span> 
+                            </a>
+                            <ul class="collapse nav flex-column ms-2 fs-6" id="submenu1" data-bs-parent="#menu">
+                                <ng-template [ngIf]="['Administrativo','Operador','Jefatura'].includes(usuario?.tipoPerfil)">
+                                    <li class="w-100">
+                                        <a href="/informeFuncionarios" class="nav-link px-0 link-light">
+                                            <i class="fa-solid fa-file-lines"></i>
+                                            <span class="ms-2 d-none d-sm-inline">Informe de los funcionarios</span>
+                                        </a>
+                                    </li>
+                                </ng-template>
+                                <ng-template [ngIf]="usuario?.tipoPerfil==='Administrativo'" >
+                                    <li>
+                                        <a href="/informeEstacionamientos" class="nav-link px-0 link-light"> 
+                                            <i class="fa-solid fa-car"></i>
+                                            <span class="ms-2 d-none d-sm-inline">Informe de los estacionamientos</span>
+                                        </a>
+                                    </li>
+                                </ng-template>
+                                <li>
+                                    <a href="/estadisticasHorarios" class="nav-link px-0 link-light">
+                                        <i class="fa-solid fa-calendar-check"></i>
+                                        <span class="ms-2 d-none d-sm-inline">Estadisticas sobre horarios</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="/consultarDatosFuncionario" class="nav-link px-0 link-light">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span class="ms-2 d-none d-sm-inline">Consultar datos de un usuario</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ng-template>
+                    <ng-template [ngIf]=" ['Funcionario'].includes(usuario?.tipoPerfil)">
+                        <li>
+                            <a routerLink="/historialReservas" class="nav-link px-0 link-light">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <span class="ms-2 d-none d-sm-inline">Historial de reservaciones</span>
+                            </a>
+                        </li>
+                    </ng-template>
+
+                </ul>
+
+                <!-- Menu Funcionario-->
+                <ng-template #menuFuncionario>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start "
+                        id="menu">
+                                                               
+                    </ul>
+                </ng-template>
+                <hr>
+            </div>
+        </div>
+        <div class="col py-3 overflow-auto " style="height: -webkit-calc(100vh - 56px)">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

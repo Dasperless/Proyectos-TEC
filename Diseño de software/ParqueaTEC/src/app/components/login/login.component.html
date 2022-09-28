@@ -1,0 +1,64 @@
+<app-toolbar></app-toolbar>
+
+<div class="container-fluid ">
+	<div class="row justify-content-center">
+		<div class="position-absolute col-lg-8">
+			<div [ngClass]="{'show': showAlert}"  class="alert alert-danger alert-dismissible text-center fade" id="login-alert" role="alert" >
+				El usuario o contraseña son incorrectos.
+				<button type="button" class="btn-close" (click)="toggleAlert(false)" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+	<!-- Formulario de login -->
+	<div class="d-flex d-flex align-items-center justify-content-center mt-3">
+		<div class="container mt-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-4">
+					<div class="border p-5 rounded shadow bg-white rounded">
+						<!-- Icono -->
+						<div class="row justify-content-center">
+							<div class="col-auto">
+								<i class="fa-solid fa-circle-user fa-10x"></i>
+							</div>
+						</div>
+						<!-- Formulario -->
+						<div class="col-auto mt-5">
+							<form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-3" ngNativeValidate >
+								<div class="form-field d-flex align-items-center">
+									<input 
+										formControlName ="correo" 
+										type="email" 
+										class="form-control text-center" 
+										id="email"
+										aria-describedby="emailHelp" 
+										placeholder="Correo"
+										required
+									>
+								</div>
+								<div class="form-field d-flex align-items-center mt-3">
+									<div class="input-group">
+										<input 
+											class="form-control text-center" 
+											formControlName ="contraseña" 
+											type="{{showPassword?'password':'text'}}" 
+											id="password"
+											placeholder="Contraseña"
+											required
+										>
+										<button class="input-group-text" type="button" (click)="togglePassword()">
+											<i class="fa fa-eye"></i>
+										</button>
+									</div>
+								</div>
+								<div class="d-grid gap-2 col-8 mx-auto mt-4">
+									<button type="submit" class="btn btn-primary">Ingresar</button>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

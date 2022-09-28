@@ -1,0 +1,19 @@
+<nav class="navbar navbar-dark bg-dark" id="toolbar">
+	<a class="mx-4 navbar-brand" href="#">ParqueaTEC</a>
+	<div class="pe-4" *ngIf="!isAdmin && id !== null">
+		<div class="btn-group dropstart" >
+			<a href="#" class="text-dark text-end text-decoration-none text-white"
+				id="dropDownNotifications" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fa-solid fa-bell "></i>
+			</a>
+				<ul class="dropdown-menu dropdown-menu-dark text-small shadow " aria-labelledby="dropDownNotifications">
+					<li>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="notificaciones" [ngModel]="notificaciones" (change)="click($event)">
+							<label class="form-check-label" for="flexSwitchCheckDefault">Notificaciones</label>
+						</div>
+					</li>
+				</ul>
+		</div>	
+	</div>
+</nav>

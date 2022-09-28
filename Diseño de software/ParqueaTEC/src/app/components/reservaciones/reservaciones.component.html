@@ -1,0 +1,157 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<ng-template [ngIf]="currentView === 'Reservar'">
+		<div class="m-5 shadow p-3 mb-5 bg-light rounded  d-flex ">
+			<div class="container">
+				<div class="row">
+					<div class="col-auto d-flex flex-fill shadow-sm rounded bg-white">
+						<div class="container bg-white">
+							<div class="d-flex justify-content-center">
+								<h1 *ngIf="ticket.numeroCampo !==undefined">{{ticket.numeroCampo}}</h1>
+								<h1 *ngIf="ticket.numeroCampo ===undefined"># Ticket</h1>
+							</div>
+							<div class="d-flex flex-column mb-3">
+                  <div *ngFor="let item of objectKeys(ticket)">
+                    <div class="row">
+                      <div class="col">
+                        <label>{{headers[item]}}</label>  
+                      </div>
+                      <div class="col">
+                        <p>{{ticket[item]}}</p>
+                      </div>
+                    </div>
+                  </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-auto d-flex flex-fill justify-content-end mx-5 px-5 ">
+						<form [formGroup]="reservacionForm" ngNativeValidate>
+							<div class="d-grid gap-3 mb-2" id="reservacionInputs">
+								<div>
+									<label for="fecha">Seleccione la fecha</label>
+									<input 
+										class="form-control" 
+										formControlName="fechaReservacion"
+										type="date" 
+										id="fecha"  
+										required
+									>
+								</div>
+                <ng-template [ngIf]="!['Administrativo','Jefatura','Operador'].includes(funcionario?.tipoPerfil)">
+                  <div >
+                    <label for="horaEntrada">Seleccione la hora de entrada</label>
+                    <input 
+                      class="form-control" 
+                      formControlName="horaEntrada"
+                      type="time" 
+                      id="horaEntrada" 
+                      required
+                    >
+                  </div>
+                  <div>
+                    <label for="horaSalida">Seleccione la hora de salida</label>
+                    <input 
+                      class="form-control" 
+                      formControlName="horaSalida"
+                      type="time" 
+                      id="horaSalida" 
+                      required
+                    >
+                  </div>
+                </ng-template>	
+							</div>
+							<div class="d-flex justify-content-end mt-2 mb-5">
+								<button 
+									*ngIf="['Administrativo','Jefatura'].includes(funcionario?.tipoPerfil)"
+									type="button" 
+									class="btn btn-primary" 
+									(click)="setCurrentView('Visitante')"
+								> Agregar Visitante</button>
+
+								<button 
+									*ngIf="funcionario?.tipoPerfil ==='Operador'" 
+									type="button" 
+									class="btn btn-primary"
+									(click)="setCurrentView('Vehiculo Oficial')"
+								>Ingresar vehículo oficial</button>
+							</div>
+							<div class="row">
+								<button type="submit" class="btn btn-primary" (click)="solicitarReservacion()">Buscar</button>
+							</div>
+							<div class="row mt-5">
+								<div class="d-flex justify-content-end d-grid gap-2">
+									<button type="button" class="btn btn-secondary" [routerLink]="'//realizarReservacion'">Cancelar</button>
+									<button type="submit" class="btn btn-primary" (click)="newReserva()">Reservar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template [ngIf]="currentView==='Visitante'" >
+		<div class="container d-flex justify-content-center">
+			<div class="w-50 m-5 shadow p-3 mb-5 bg-light rounded  d-flex justify-content-center" style="width: 100vh;">
+				<div class="container" >
+					<form [formGroup]="visitanteForm" class="d-grid gap-2" ngNativeValidate>
+						<div>
+							<label for="nombre">Nombre</label>
+							<input class="form-control" formControlName="nombre" type="text" id="nombre" required>
+						</div>
+						<div>
+							<label for="identificacion">Identificacion</label>
+							<input class="form-control" formControlName="identificacion"  type="text" id="identificacion" required>
+						</div>
+						<div>
+							<label for="numeroVehiculo">Numero de vehiculo</label>
+							<input class="form-control" formControlName="numeroVehiculo" type="text" id="numeroVehiculo" required>
+						</div>
+						<div>
+							<label for="motivoVisita">Motivo de la visita</label>
+							<textarea class="form-control" formControlName="motivoVisita" id="motivoVisita" rows="3" required></textarea>
+						</div>
+						<div>
+							<label for="sitoDondeSeDirige">Sitio donde se dirige</label>
+							<input class="form-control" type="text" formControlName="sitioDondeSeDirige" id="sitoDondeSeDirige" required>
+						</div>
+						<div class="d-flex justify-content-end gap-2">
+							<button type="button" class="btn btn-secondary" (click)="setCurrentView('Reservar')">Cancelar</button>
+							<button type="submit" class="btn btn-primary" (click)="newVisitante()">Agregar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template [ngIf]="currentView==='Vehiculo Oficial'" >
+		<div class="container d-flex justify-content-center">
+			<div class="w-50 m-5 shadow p-3 mb-5 bg-light rounded  d-flex justify-content-center" style="width: 100vh;">
+				<div class="container" >
+					<form [formGroup]="vehiculoOficialForm" class="d-grid gap-2" ngNativeValidate>
+						<div>
+							<label for="placa">Placa</label>
+							<input class="form-control" formControlName="placa" type="text" id="placa" required>
+						</div>
+						<div>
+							<label for="modelo">Modelo</label>
+							<input class="form-control" formControlName="modelo"  type="text" id="modelo" required>
+						</div>
+						<div>
+							<label for="color">Color</label>
+							<input class="form-control" formControlName="color" type="text" id="color" required>
+						</div>
+						<div>
+							<label for="chofer">Chofer</label>
+							<input class="form-control" formControlName="chofer" id="chofer" rows="3" required>
+						</div>
+						<div class="d-flex justify-content-end gap-2">
+							<button type="button" class="btn btn-secondary" (click)="setCurrentView('Reservar')">Cancelar</button>
+							<button type="submit" class="btn btn-primary" (click)="newVehiculoOficial()">Agregar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</ng-template>	
+</app-sidebar>

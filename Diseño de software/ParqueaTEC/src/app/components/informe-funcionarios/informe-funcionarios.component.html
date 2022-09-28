@@ -1,0 +1,65 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container p-50">
+		<div class="card">
+			<div class="card-body">
+				<div class="row mb-3">
+					<ng-template [ngIf]="funcionario?.tipoPerfil !== 'Jefatura'">
+					<label for="inputDepartamento" class="col-sm-2 col-form-label">Organizar por</label>
+					<div class="col-sm-10 w-25">
+							<form [formGroup]="departamentoForm" >
+								<select class="form-select" aria-label="Default select example" formControlName="departamento">
+									<option value="" selected>Departamento</option>
+									<ng-template ngFor let-departamento [ngForOf]="departamentos">
+										<option  value="{{departamento.nombre}}">{{departamento.nombre}}</option>
+									</ng-template>	
+								</select>
+							</form>
+						</div>
+					</ng-template>
+				</div>
+				  <div class="table-responsive">
+					<table class="table table-striped">
+						<thead >
+							<td>Admin</td>
+							<td>Funcionario</td>
+							<td>Identificación</td>
+							<td>Departamento</td>
+							<td>Correo</td>
+							<td>Correo alterno</td>
+							<td>Teléfono</td>
+							<td>Notificaciones</td>
+						</thead>
+						<tbody>
+							<ng-template  ngFor let-funcionario [ngForOf] ="funcionarios|informeFuncionarios:departamentoForm.value['departamento']">
+								<tr>
+									<ng-template [ngIf]="funcionario.esAdmin" [ngIfElse]=noAdmin>
+										<td>Sí</td>
+									</ng-template>
+									<ng-template #noAdmin>
+										<td>No</td>
+									</ng-template>
+									<td>{{ funcionario.nombre }}</td>
+									<td>{{ funcionario.identificacion}}</td>
+									<td>{{ funcionario.escuela }}</td>
+									<td>{{ funcionario.correo }}</td>
+									<td>{{ funcionario.correoAlterno }}</td>
+									<td>{{ funcionario.telefono }}</td>
+									<ng-template [ngIf]="funcionario.notificaciones" [ngIfElse]=noAdmin>
+										<td>Sí</td>
+									</ng-template>
+									<ng-template #noAdmin>
+										<td>No</td>
+									</ng-template>								
+								</tr>								
+							</ng-template>
+
+					</table>
+				  </div>
+
+			</div>
+		</div>		
+	</div>
+
+
+</app-sidebar>

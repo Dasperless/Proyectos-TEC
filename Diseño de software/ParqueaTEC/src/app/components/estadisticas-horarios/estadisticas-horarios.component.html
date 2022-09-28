@@ -1,0 +1,21 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container p-50">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-borderless">
+					<thead>
+						<td>Funcionario</td>
+						<td>Día</td>	
+						<td>Hora ingreso</td>	
+						<td>Hora salida</td>	
+					</thead>
+					<tbody>
+						<ng-template ngFor let-funcionario [ngForOf]="funcionarios">
+							
+						</ng-template>
+				</table>
+			</div>
+		</div>		
+	</div>
+</app-sidebar>

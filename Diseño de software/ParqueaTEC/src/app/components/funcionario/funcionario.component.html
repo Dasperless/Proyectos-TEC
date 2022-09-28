@@ -1,0 +1,38 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container mt-3">
+		<div class="d-flex justify-content-center  row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+			<div class="col" >
+				<div class="card shadow p-3 bg-body rounded" >
+					<div class="card-body text-center">
+						<a routerLink="/realizarReservacion" class="text-decoration-none text-black">
+							<img src="../../../assets/icon-car.png" class="card-img-top w-50 mx-auto mb-3" alt="Foto de perfil funcionario">
+							<h6 class="card-title fs-5 text-center">Realizar reservación</h6>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col" >
+				<div class="card shadow p-3 bg-body rounded" >
+					<div class="card-body text-center">
+						<a [routerLink]="'/placas/'+ id" class="text-decoration-none text-black">
+							<img src="../../../assets/icon-licence-plate.png" class="card-img-top w-50 mx-auto mb-3" alt="Foto de perfil funcionario">
+							<h6 class="card-title fs-5 text-center">Placas</h6>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col" >
+				<div class="card shadow p-3 bg-body rounded" >
+					<div class="card-body text-center">
+						<a routerLink="/horario" class="text-decoration-none text-black">
+							<img src="../../../assets/icons-week-view.png" class="card-img-top w-50 mx-auto mb-3" alt="Foto de perfil funcionario">
+							<h6 class="card-title fs-5 text-center">Horario</h6>
+						</a>
+					</div>
+				</div>
+			</div>						
+		</div>
+		
+	</div>
+</app-sidebar>

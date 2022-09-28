@@ -1,0 +1,97 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+    <div class="d-flex w-50 justify-content-center container">
+        <div class="d-flex align-items-center mt-5">
+            <div class ="border p-4 rounded shadow bg-white rounded">
+                <div class="row justify-content-center">
+                    <form [formGroup]="registerForm" (ngSubmit)="submit()" ngNativeValidate>
+                        <div class="row mb-2 align-items-center">
+                            <div class="col">
+                                    <label class="form-label" for="TipoParqueo">Tipo de Parqueo</label>
+                                    <select formControlName="TipoParqueo" class="form-select">
+                                          <option  *ngFor="let TipoParqueo of TipoParqueos" 
+                                          [value] = "TipoParqueo._id">
+                                          {{TipoParqueo.nombre }}</option>>
+                                    </select>
+                            </div>
+                            <div class="col">
+                                    <label class="form-label" for="NombreParqueo">Nombre del Parqueo</label>
+                                    <input formControlName="NombreParqueo" type="text" id="NombreParqueo" class="form-control" placeholder="Nombre del Parqueo" />
+                            </div>
+                            
+                        </div>
+                        
+                        <label class="form-label" for="EspaciosParqueo">Espacios para el parqueo</label>
+                        <div class="row mb-2 align-items-center" id="EspaciosParqueo">
+                            <div class="col">
+                                    <label class="form-label" for="CantidadEspacios">Estándar</label>
+                                    <input formControlName="CantidadEspacios" type="number" id="NombreParqueo" class="form-control"/>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="EspaciosJefaturas">Jefatura</label>
+                                <input formControlName="EspaciosJefaturas" type="number" id="EspaciosJefaturas" class="form-control"/>
+                            </div>
+        
+                            <div class="col">
+                                <label class="form-label" for="EspaciosOficiales"> Vehículos</label>
+                                <input formControlName="EspaciosOficiales" type="number" id="EspaciosOficiales" class="form-control" required/>
+                            </div>
+        
+                            <div class="col">
+                                <label class="form-label" for="EspaciosDiscapacitados">Discapacitados</label>
+                                <input formControlName="EspaciosDiscapacitados" type="number" id="EspaciosDiscapacitados" class="form-control" required/>
+                            </div>
+        
+                            <div class="col">
+                                <label class="form-label" for="EspaciosVisitantes">Visitantes</label>
+                                <input formControlName="EspaciosVisitantes" type="number" id="EspaciosVisitantes" class="form-control" required/>
+                            </div>                    
+                            
+                        </div>
+        
+                        <div class="row mb-2 align-items-center">
+                            <div class="col">
+                                <div class="form-outline input-group-md">
+                                    <label class="form-label" for="Ubicacion">Ubicacion</label>
+                                    <input formControlName="Ubicacion" type="text" id="Ubicacion" class="form-control" placeholder="Calle, avenida o parte del campus" required/>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="row mb-2 align-items-center">
+                            <div class="col">
+                                <div class="form-outline input-group-md">
+                                    <label class="form-label" for="FormaDeAcceder">Forma de Acceder</label>
+                                    <input formControlName="FormaAcceder" type="text" id="FormaDeAcceder" class="form-control" placeholder="Refencia para acceder al parqueo" required/>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="row mb-2 align-items-center">
+                            <div class="col">
+                                <div class="form-outline input-group-md">
+                                    <label class="form-label" for="Horario">Horario</label>
+                                    <input formControlName ="Horario" type="text" id="Horario" class="form-control" placeholder="Ej: Lunes a viernes de 7am a 6pm" required/>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <ng-template [ngIf]="isRegister()" [ngIfElse]="editarFuncionario">
+                            <div class="d-grid gap-2 col-4 mx-auto">
+                                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        
+                                </div>
+                            </ng-template>
+                            <ng-template #editarFuncionario>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="button" routerLink="/parqueos" class="btn btn-secondary btn-block ">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                                </div>
+                        </ng-template>
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</app-sidebar>

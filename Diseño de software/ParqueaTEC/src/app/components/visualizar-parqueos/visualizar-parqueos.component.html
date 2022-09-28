@@ -1,0 +1,68 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="d-grid justify-content-md-end ">
+		<button class="btn btn-primary" routerLink="/registrarParqueo">Agregar</button>
+	</div>
+	<div class="container-sm-flex mt-3 px-md	-5">
+		<div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 mx-md-5">
+			<div class="card w-100 shadow p-3 bg-body rounded" *ngFor="let parqueo of parqueos">
+				<!-- Menu de opciones -->
+				<div class="d-flex justify-content-end">
+					<a	href="#" 
+						class="d-flex justify-content-end text-dark text-end text-decoration-none mt-2"
+						id="dropdownUser1" 
+						data-bs-toggle="dropdown" 
+						aria-expanded="false"
+					>
+						<i class="fa-solid fa-ellipsis  pt-1 px-2"></i>
+					</a>
+	
+					<!-- Menu de editar/eliminar -->
+					<ul class="dropdown-menu dropdown-menu-dark text-small" aria-labelledby="dropdownUser1">
+						<li><a class="dropdown-item" [routerLink]="'//editarParqueo//'+parqueo._id">Editar parqueo</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>							
+						<li><a class="dropdown-item" href="" data-bs-toggle="modal" [attr.data-bs-target]="'#modalEliminar-'+parqueo._id">Eliminar parqueo</a></li>						
+					</ul>	
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade " [id]= "'modalEliminar-'+parqueo._id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Eliminar parqueo</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							¿Está seguro de eliminar a {{parqueo.NombreParqueo}}?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarParqueo(parqueo._id)">Eliminar</button>
+						</div>
+						</div>
+					</div>
+				</div>				
+
+				<div class="px-5">				
+					<div class="d-lg-inline-flex">
+						<div class="d-flex justify-content-center">
+							<img src="../../../assets/parking.png" alt="" class="rounded float-start img-fluid">
+						</div>	
+	
+						<div class="d-flex align-items-center px-md-5 w-100">
+							<div class="card-body">
+								<h1 class="card-title">{{parqueo.NombreParqueo}}</h1>
+								<p class="card-text text-secondary">{{parqueo.Ubicacion}}</p>
+							  </div>
+						</div>
+				</div>
+
+				</div>
+			  </div>
+		</div>
+	</div>
+</app-sidebar>
+

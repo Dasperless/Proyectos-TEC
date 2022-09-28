@@ -1,0 +1,22 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+  <div class="container mt-3">
+    <div  class="row row-cols-1 row-cols-md-3 g-2">
+      <div *ngFor="let reserva of reservas">
+        <div *ngIf="reserva.estado && ['Oficial','Visitante'].includes(reserva?.tipoCampo)">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+              <div class="card-header">Reserva</div>
+              <div class="card-body card-text-center">
+                <h6 class="card-title fs-6 text-center"># Campo: {{reserva.numeroCampo}}</h6>
+                <h6 class="card-title fs-6 text-center">Estado: activo</h6>
+                <h6 class="card-title fs-6 text-center">Funcionario: {{reserva.funcionario}}</h6>
+                <h6 class="card-title fs-6 text-center">Tipo de campo: {{reserva.tipoCampo}}</h6>
+                <button class="btn btn-light " (click)="eliminarReserva(reserva._id)">Liberar campo</button>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</app-sidebar>

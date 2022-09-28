@@ -1,0 +1,80 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container mt-3 ">
+		<div class="container text-center">
+			<img src="../../../assets/profile-picture.png" alt="" class="w-25 rounded-circle">
+		</div>
+		<div class="card mx-auto w-75 mt-3">
+			<div class="card-body">
+				<ng-template ngFor let-data [ngForOf]="funcionario|keyvalue">
+						<div class="row">
+							<div class="col-md-6">
+								<p class="card-text">{{getHeader(data.key)}}</p>
+							</div>
+							<div class="col-md-6">
+								<p class="card-text">{{data?.value}}</p>
+							</div>
+						</div>
+				</ng-template>
+				<!-- <div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Nombre completo</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.nombre}}</span>
+					</div>
+				</div>
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Identificación</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.identificacion}}</span>
+					</div>
+				</div>
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Perfil</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.tipoPerfil}}</span>
+					</div>
+				</div>					
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Correo institucional</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.correo}}</span>
+					</div>
+				</div>
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Correo alterno</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.correoAlterno}}</span>
+					</div>
+				</div>
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Celular</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.telefono}}</span>
+					</div>
+				</div>																			
+				<div class="row g-0">
+					<div class="col-sm-6 col-md-3">
+						<p class="fw-bold">Escuela</p>
+					</div>
+					<div class="col-6 col-md-4">
+						<span class="fw-normal">{{funcionario.escuela}}</span>
+					</div>
+				</div>					 -->
+				
+			</div>
+		</div>
+	</div>
+</app-sidebar>
+

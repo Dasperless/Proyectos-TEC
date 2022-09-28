@@ -1,0 +1,34 @@
+<app-toolbar></app-toolbar>
+<app-sidebar>
+	<div class="container p-50">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-striped table-responsive">
+					<thead>
+						<td>Nombre</td>
+						<td>Tipo</td>
+						<td>Ubicación</td>
+						<td>Forma Acceder</td>	
+						<td>Horario</td>	
+						<td>Cantidad espacios</td>	
+						<td>Espacios Oficiales</td>	
+						<td>Espacios discapacitados</td>	
+					</thead>
+					<tbody>
+						<ng-template ngFor let-parqueo [ngForOf]="parqueos">
+							<tr>
+								<td>{{parqueo.NombreParqueo}}</td>
+								<td>{{parqueo.TipoParqueo}}</td>
+								<td>{{parqueo.Ubicacion}}</td>
+								<td>{{parqueo.FormaAcceder}}</td>
+								<td>{{parqueo.Horario}}</td>
+								<td>{{parqueo.CantidadEspacios}}</td>
+								<td>{{parqueo.EspaciosOficiales}}</td>
+								<td>{{parqueo.EspaciosDiscapacitados}}</td>
+							</tr>
+						</ng-template>
+				</table>
+			</div>
+		</div>		
+	</div>
+</app-sidebar>
