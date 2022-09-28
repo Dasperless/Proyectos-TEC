@@ -1,0 +1,15 @@
+RANKING TIOBE,Nombre,Paradigma,Rating
+6,VisualBasicNet,OO,3.18
+10,Swift,Imperativo,2.27
+4,C#,OO,4.41
+13,R,Imperativo,2.07
+5,Python,OO,3.91
+3,C++,OO,5.19
+7,PHP,HTML,3.01
+11,Ruby,OO,2.25
+1,Java,OO,16.39
+8,Javascript,Scripting,2.67
+2,C,Imperativo,7.75
+9,Delphi,Imperativo,2.54
+14,VisualBasic,OO,2.01
+12,Emsablador,Imperativo,2.23
