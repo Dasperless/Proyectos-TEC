@@ -1,0 +1,14 @@
+....MMMMMMMMMMMMM
+.MMMM....M......M
+.M.......M..X...M
+.M..........X...M
+MMMKMMM.MMMMMMMMM
+M..MM....MM..M..M
+M.X.M........MX.M
+M........MM...X.M
+M.....M..MM.....M
+MMMM..M..MMMMMMMM
+MM...XM..M...OOOM
+MM...........OOOM
+M.....M.........M
+MMMMMMMMMMMMMMMMM

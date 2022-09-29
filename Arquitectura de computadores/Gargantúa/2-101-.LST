@@ -1,0 +1,649 @@
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 1
+18123226.ASM
+
+
+
+      1				     ;-----------------------------------------------------------------------------------------------
+      2				     ------
+      3				     ;										     TAREA GARGANTUA
+      4				     ;-----------------------------------------------------------------------------------------------
+      5				     ------
+      6				     ;			     ARQUITECTURA DE COMPUTADORES
+      7				     ;
+      8				     ;			     GRUPO 2
+      9				     ;
+     10				     ;			     ESTUDIANTE: ADRIÁN DARÍO	VARGAS MONTOYA
+     11				     ;
+     12				     ;			     PROFESOR: KIRSTEIN	GATJENS	SOTO
+     13				     ;
+     14				     ;			     CARNE: 2018123226
+     15				     ;-----------------------------------------------------------------------------------------------
+     16				     ------
+     17				     ;										     MANUAL DE	    +
+     18				     USUARIO
+     19				     ;-----------------------------------------------------------------------------------------------
+     20				     ------
+     21				     ; +Para el	funcionamiento de este programa	se necesita DOSBox,Tlink y TASM
+     22				     ; +Se ingresa en la consola de DOSBox el siguiente	comando	para compilarlo
+     23				     ;
+     24				     ; >tasm 18123226
+     25				     ;
+     26				     ; +Luego se enlaza	de la siguiente	manera
+     27				     ;
+     28				     ; >tlink 18123226
+     29				     ;
+     30				     ; +Por último se inicia el programa, primero se Ingresar el nombre y la cantidad a girar
+     31				     ;
+     32				     ; >18123226 Dario Vargas 6000
+     33				     ;
+     34				     ;-----------------------------------------------------------------------------------------------
+     35				     ------
+     36				     ;									     ANÁLISIS DE RESULTADOS
+     37				     ;-----------------------------------------------------------------------------------------------
+     38				     ------
+     39				     ;
+     40				     ;-----------------------------------------------------------------------------------------------
+     41				     ------
+     42
+     43	0000			     datos segment
+     44	0000  50 52 4F 47 52 41	4D+	     AcercaDe db "PROGRAMA QUE REALIZA CALCULOS",10					    +
+     45	      41 20 51 55 45 20	52+  ;Mini acerca de
+     46	      45 41 4C 49 5A 41	20+
+     47	      43 41 4C 43 55 4C	4F+
+     48	      53 0A
+     49	001E  50 52 4F 47 52 41	4D+			      db "PROGRAMA CREADO POR DARIO VARGAS MONTOYA",10,10,"$"		    +
+     50	      41 20 43 52 45 41	44+  ;Mini acerca de 2
+     51	      4F 20 50 4F 52 20	44+
+     52	      41 52 49 4F 20 56	41+
+     53	      52 47 41 53 20 4D	4F+
+     54	      4E 54 4F 59 41 0A	0A+
+     55	      24
+     56
+     57	0049  55 73 6F 3A 20 31	38+	     Ayuda db "Uso: 18123226 [Opcion] [Base] [Base-num-] [Base-num-]",10,10,"$"
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 2
+18123226.ASM
+
+
+
+     58	      31 32 33 32 32 36	20+
+     59	      5B 4F 70 63 69 6F	6E+
+     60	      5D 20 5B 42 61 73	65+
+     61	      5D 20 5B 42 61 73	65+
+     62	      2D 6E 75 6D 2D 5D	20+
+     63	      5B 42 61 73 65 2D	6E+
+     64	      75 6D 2D 5D 0A 0A	24
+     65
+     66	0081  4F 70 63 69 6F 6E	65+	     Opciones db "Opciones:",10,09
+     67	      73 3A 0A 09
+     68	008C  2D 68 09 4D 75 65	73+			      db     "-h",09,"Muestra la ayuda del programa.",10,09
+     69	      74 72 61 20 6C 61	20+
+     70	      61 79 75 64 61 20	64+
+     71	      65 6C 20 70 72 6F	67+
+     72	      72 61 6D 61 2E 0A	09
+     73	00AF  2D 73 09 53 75 6D	61+			      db     "-s",09,"Suma dos numeros de cualquier verifBase.",10,09
+     74	      20 64 6F 73 20 6E	75+
+     75	      6D 65 72 6F 73 20	64+
+     76	      65 20 63 75 61 6C	71+
+     77	      75 69 65 72 20 76	65+
+     78	      72 69 66 42 61 73	65+
+     79	      2E 0A 09
+     80	00DC  2D 72 09 52 65 73	74+			      db     "-r",09,"Resta dos	numeros	de cualquier verifBase.",10,09
+     81	      61 20 64 6F 73 20	6E+
+     82	      75 6D 65 72 6F 73	20+
+     83	      64 65 20 63 75 61	6C+
+     84	      71 75 69 65 72 20	76+
+     85	      65 72 69 66 42 61	73+
+     86	      65 2E 0A 09
+     87	010A  2D 6D 09 4D 75 6C	74+			      db     "-m",09,"Multiplica dos numeros de	cualquier verifBase.",10,09
+     88	      69 70 6C 69 63 61	20+
+     89	      64 6F 73 20 6E 75	6D+
+     90	      65 72 6F 73 20 64	65+
+     91	      20 63 75 61 6C 71	75+
+     92	      69 65 72 20 76 65	72+
+     93	      69 66 42 61 73 65	2E+
+     94	      0A 09
+     95	013D  2D 64 09 44 69 76	69+			      db     "-d",09,"Divide dos numeros de cualquier verifBase.$",10,09
+     96	      64 65 20 64 6F 73	20+
+     97	      6E 75 6D 65 72 6F	73+
+     98	      20 64 65 20 63 75	61+
+     99	      6C 71 75 69 65 72	20+
+    100	      76 65 72 69 66 42	61+
+    101	      73 65 2E 24 0A 09
+    102
+    103	016D  45 72 72 6F 72 24		     errorMsj db "Error$"
+    104	0173  45 72 72 6F 72 20	64+	     errorConversion db	"Error de conversion$"
+    105	      65 20 63 6F 6E 76	65+
+    106	      72 73 69 6F 6E 24
+    107
+    108	0187  08*(00)			     operacion db 8 dup(0)   ;Caracter ASCII con la letra de la	operacion
+    109	018F  08*(00)			     baseRes db	8 dup(0)	     ;Base de la respuesta de la operacion
+    110	0197  08*(00)			     baseNum1 db 8 dup(0)    ;Base del primer numero
+    111	019F  08*(00)			     baseNum2 db 8 dup(0)    ;Base del segundo numero
+    112	01A7  08*(00)			     num1 db 8 dup(0)		     ;Valor del	primer numero
+    113	01AF  08*(00)			     num2 db 8 dup(0)		     ;Valor del	segundo	numero
+    114	01B7  10*(00)			     comando db	16 dup(0)    ;El comando ingresado en la consola
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 3
+18123226.ASM
+
+
+
+    115
+    116	01C7			     datos endS
+    117
+    118	0000			     pila segment stack	'stack'
+    119	0000  0100*(????)		     dw	256 dup(?)
+    120	0200			     pila ends
+    121
+    122	0000			     codigo segment
+    123					     assume cs:codigo, ds:datos, ss:pila
+    124					     ;--------------------------------------------------------------
+    125	0000				     copiarNums	proc
+    126					     ;Copia la base y el numero	en diferentes areas de memoria
+    127					     ;--------------------------------------------------------------
+    128
+    129	0000  80 3C DD				     cmp byte ptr[si],221
+    130	0003  74 4B				     je	errorNums		     ;Si no se ingresaron los números muestra error
+    131	0005  BF 0197r				     lea di,baseNum1	     ;Mueve a [di] el área de memoria de la base del número
+    132
+    133	0008					     verifBaseNum1:
+    134	0008  E8 0105					     call StringToInt	     ;Convierte	la base	de string a entero
+    135	000B  8B F8					     mov di,ax			     ;Mueve al área de	memoria	el número  +
+    136				     en	decimal
+    137	000D  3C 02					     cmp al,2
+    138	000F  7C 3F					     jl	errorNums	     ;Si la base es menor a 2 muestra error
+    139	0011  3C 20					     cmp al,32
+    140	0013  7F 3B					     jg	errorNums	     ;Si el número es mayor a 32 muestra error
+    141
+    142	0015  80 3C 2D					     cmp byte ptr[si],'-'
+    143	0018  75 36					     jne errorNums		     ;Si no es una guion muestra error
+    144
+    145	001A  46				     inc si
+    146	001B  BF 01A7r				     lea di,num1
+    147	001E					     verifNum:
+    148						     ;Verifica si se coloaron numeros
+    149	001E  80 3C 30					     cmp byte ptr[si],'0'
+    150	0021  7C 2D					     jl	errorNums		     ;Si el caracter es	menor a	48 muestra  +
+    151				     error
+    152	0023  80 3C 39					     cmp byte ptr[si],'9'
+    153	0026  7F 03					     jg	verifLetra		     ;Si el caracter es	mayor a	57 Verifica +
+    154				     si	es letra
+    155
+    156							     ;cmp byte ptr[si],221
+    157	0028  EB 0B 90					     jmp cicloNum
+    158
+    159
+    160	002B					     verifLetra:
+    161						     ;Verifica si se colocaron letras
+    162	002B  80 3C 41					     cmp byte ptr[si],'A'
+    163	002E  7C 20					     jl	errorNums		     ;Si el caracter es	menor a	65 muestra  +
+    164				     error
+    165	0030  80 3C 5A					     cmp byte ptr[si],'Z'
+    166	0033  7F 1B					     jg	errorNums		     ;Si el caracter es	mayor a	90 muestra  +
+    167				     error
+    168
+    169	0035					     cicloNum:
+    170	0035  80 3C 2D					     cmp byte ptr [si],'-'
+    171	0038  74 20					     je	finCop
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 4
+18123226.ASM
+
+
+
+    172	003A  8A 04					     mov al,byte ptr [si]
+    173
+    174	003C  52					     push dx
+    175	003D  50					     push ax
+    176	003E  8A D0					     mov dl,al
+    177	0040  B4 02					     mov ah,02h
+    178	0042  58					     pop ax
+    179	0043  5A					     pop dx
+    180
+    181	0044  88 05					     mov byte ptr[di],al
+    182	0046  46					     inc si
+    183	0047  47					     inc di
+    184	0048  80 3C 20					     cmp byte ptr[si],'	'
+    185	004B  75 E8					     jne cicloNum
+    186	004D  EB 0B 90					     jmp finCop
+    187
+    188
+    189	0050					     errorNums:
+    190	0050  BA 016Dr					     lea dx,errorMsj
+    191	0053  B4 09					     mov ah,09h
+    192	0055  CD 21					     int 21h
+    193	0057  E9 0145					     jmp fin
+    194
+    195	005A					     finCop:
+    196
+    197							     ;inc di
+    198							     ;mov byte ptr [di],'$'
+    199
+    200							     ;lea bx,num1
+    201							     ;mov dl,byte ptr[bl]
+    202	005A  8A 15					     mov dl, byte ptr[di]
+    203	005C  B4 02					     mov ah,02h
+    204	005E  CD 21					     int 21h
+    205	0060  C3					     ret
+    206
+    207	0061				     copiarNums	endp
+    208
+    209					     ;--------------------------------------------------------------
+    210	0061				     CopiarComando proc
+    211					     ;Copia lo que esta	en la linea de comandos	a un area de memoria
+    212					     ;Recibe en	[di] un	puntero	a un area de memoria
+    213					     ;No devuelve ningun valor
+    214					     ;--------------------------------------------------------------
+    215	0061  50				     push ax
+    216	0062  06				     push es
+    217	0063  56				     push si
+    218	0064  51				     push cx
+    219
+    220	0065  BE 0080				     mov si,80h						     ;Puntero al DTA
+    221	0068  33 C9				     xor cx,cx						     ;Limpia el	[cx]
+    222	006A  26: 8A 0C				     mov cl,byte ptr es:[si]		     ;Mueve a [cl] la cantidad de caracteres
+    223	006D  80 F9 00				     cmp cl,0
+    224	0070  74 04				     je	noArg						     ;Si en la línea de    +
+    225				     comandos no hay argumentos	muestra	error
+    226
+    227	0072  46				     inc si
+    228	0073  EB 07 90				     jmp sigCaract
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 5
+18123226.ASM
+
+
+
+    229
+    230	0076					     noArg:
+    231	0076  E8 0083					     call mostrarAyuda			     ;Muestra la ayuda en caso de   +
+    232				     que no se haya ingresado nada
+    233	0079  E9 0123					     jmp fin					     ;Finaliza el programa
+    234
+    235	007C					     sigCaract:
+    236	007C  46					     inc si
+    237	007D  26: 8A 04					     mov al, byte ptr es:[si]	     ;Mueve a [al] un caracter
+    238	0080  88 05					     mov byte ptr [di],	al	     ;Mueve en [di] el caracter	en [al]
+    239	0082  47					     inc di
+    240
+    241	0083  E2 F7					     loop sigCaract			     ;Mientras [cx]>0 se mueve a sig+
+    242				     caracter
+    243	0085  C6 05 24				     mov byte ptr[di],'$'		     ;Mueve a [di] un caracter de	    +
+    244				     terminación
+    245
+    246	0088  59				     pop cx
+    247	0089  5E				     pop si
+    248	008A  07				     pop es
+    249	008B  58				     pop ax
+    250	008C  C3				     ret
+    251	008D				     CopiarComando endp
+    252
+    253
+    254					     ;-----------------------------------------------------------
+    255	008D				     PrintStr proc
+    256					     ; Imprime un sting	con la instruccion 09h
+    257					     ; Recibe: [DX] apuntando al mensaje a imprimir
+    258					     ; Devuelve: El string en la salida	estandar
+    259					     ;-----------------------------------------------------------
+    260	008D  52				     push dx
+    261	008E  50				     push ax
+    262
+    263	008F  B4 09				     mov ah, 09h
+    264	0091  CD 21				     int 21h
+    265
+    266	0093  5A				     pop dx
+    267	0094  58				     pop ax
+    268
+    269	0095  C3			     ret
+    270	0096				     PrintStr endp
+    271
+    272					     ;-----------------------------------------------------------
+    273	0096				     VerifComando proc
+    274					     ; Verifica	si el comando se inserto correctamente
+    275					     ; Recibe en [si]	     un	puntero	a un string
+    276					     ;-----------------------------------------------------------
+    277	0096  56				     push si
+    278	0097  06				     push es
+    279	0098  52				     push dx
+    280	0099  51				     push cx
+    281	009A						     verifOperacion:
+    282	009A  8A 14						     mov dl, byte ptr [si]
+    283	009C  80 FA 2D						     cmp dl,"-"					     ;Compara si el +
+    284				     caracter es un guion
+    285	009F  75 52						     jne errorComando			     ;Si no es un guion	    +
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 6
+18123226.ASM
+
+
+
+    286				     muestra error
+    287
+    288	00A1  46						     inc si					     ;Incrementa si +
+    289				     para apuntar al siguiente caracter
+    290	00A2  8A 14						     mov dl,byte ptr [si]	     ;Mueve a [dl] el puntero de un +
+    291				     caracter en la linea de comandos
+    292	00A4  80 FA 68						     cmp dl,"h"					     ;Verifica si el+
+    293				     caracter es h
+    294	00A7  74 53						     je	mostrarAyuda			     ;Si es el caracter	es h+
+    295				     muestra la	ayuda
+    296
+    297	00A9  B4 02						     mov ah, 02h				     ;Instruccion   +
+    298				     para imprimir caracter
+    299	00AB  80 FA 73						     cmp dl,"s"					     ;Compara [dl]  +
+    300				     con el caracter "s"
+    301	00AE  74 52						     je	letraOp						     ;Si es +
+    302				     igual a "s" salta a sum
+    303
+    304	00B0  80 FA 72						     cmp dl,"r"					     ;Compara [dl]  +
+    305				     con "r"
+    306	00B3  74 4D						     je	letraOp						     ;Si es +
+    307				     "s" salta a res
+    308
+    309	00B5  80 FA 6D						     cmp dl,"m"					     ;Compara [dl]  +
+    310				     con "m"
+    311	00B8  74 48						     je	letraOp						     ;Si es +
+    312				     "m" salta a multiplicar
+    313
+    314	00BA  80 FA 64						     cmp dl,"d"					     ;Compara [dl]  +
+    315				     con "d"
+    316	00BD  74 43						     je	letraOp						     ;Si es +
+    317				     "d" salta a div
+    318
+    319	00BF  EB 32 90						     jmp errorComando			     ;Si no es ninguno	    +
+    320				     muestra error de comando
+    321
+    322	00C2						     verifBase:
+    323	00C2  46						     inc si					     ;Siguiente	    +
+    324				     caracter
+    325	00C3  8A 14						     mov dl, byte ptr [si]	     ;Mueve a [dl] el siguiente	    +
+    326				     caracter
+    327	00C5  80 FA 20						     cmp dl,' '					     ;Compara [dl]  +
+    328				     con un espacio
+    329	00C8  75 29						     jne errorComando			     ;Si no es un espacio   +
+    330				     muestra error
+    331	00CA  46						     inc si					     ;Siguiente	    +
+    332				     caracter
+    333	00CB  8A 14						     mov dl, byte ptr [si]	     ;Mueve a [dl] el siguiente	    +
+    334				     caracter
+    335	00CD  80 FA 39						     cmp dl,'9'
+    336	00D0  7F 21						     jg	errorComando			     ;Si es mayor a el	    +
+    337				     caracter 57 ASCII muestra error
+    338	00D2  80 FA 30						     cmp dl,'0'
+    339	00D5  7C 1C						     jl	errorComando			     ;Si es menor que el    +
+    340				     caracter 48 ASCII muestra error
+    341
+    342	00D7  E8 0036						     call StringToInt			     ;Transforma de ascii a +
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 7
+18123226.ASM
+
+
+
+    343				     decimal
+    344	00DA  BF 018Fr						     lea di,baseRes			     ;Puntero a	área de    +
+    345				     memoria
+    346	00DD  88 05						     mov byte ptr [di],al	     ;Mueve el número en decimal a +
+    347				     el	área de memoria
+    348
+    349	00DF  3C 02						     cmp al,2
+    350	00E1  7C 10						     jl	errorComando			     ;Si la base es menor a +
+    351				     2 muestra error
+    352	00E3  3C 24						     cmp al,36
+    353	00E5  7F 0C						     jg	errorComando			     ;Si l abase es mayor a +
+    354				     36	muestra	error
+    355
+    356	00E7						     verifNums:
+    357	00E7  80 3C 20						     cmp byte ptr [si],' '	     ;Espacio que debe separar la   +
+    358				     base de resultado de los numeros
+    359	00EA  75 07						     jne errorComando			     ;Si no existe un	    +
+    360				     espacio muestra un	error
+    361	00EC  46						     inc si					     ;Siguiente	    +
+    362				     caracter
+    363	00ED  E8 FF10						     call copiarNums			     ;Copia los	numeros	en  +
+    364				     sus repectivas areas de memoria
+    365
+    366	00F0  EB 19 90					     jmp finVerif
+    367
+    368	00F3						     errorComando:
+    369	00F3  BA 016Dr						     lea dx,errorMsj	     ;Mueve a [dx] un puntero al mensaje de +
+    370				     error
+    371	00F6  E8 FF94						     call PrintStr	     ;Imprime el mensaje
+    372	00F9  E9 00A3						     jmp fin
+    373
+    374	00FC						     mostrarAyuda:
+    375	00FC  E8 0051						     call MensajeAyuda	     ;Muestra el mensaje de ayuda
+    376	00FF  E9 009D						     jmp fin			     ;Finaliza el proceso
+    377
+    378	0102						     letraOp:
+    379	0102  BF 0187r						     lea di,operacion		     ;Puntero a	área en memoria
+    380	0105  8A 1C						     mov bl,byte ptr[si]	     ;Mueve a [bl] el caracter actual
+    381	0107  88 1D						     mov byte ptr [di],bl    ;Mueve al área en	memoria	el caracter +
+    382				     actual
+    383	0109  EB B7						     jmp verifBase
+    384
+    385	010B						     finVerif:
+    386								     ;mov dl,byte ptr[si]
+    387								     ;mov ah,02h
+    388								     ;int 21h
+    389	010B  59						     pop cx
+    390	010C  5A						     pop dx
+    391	010D  07						     pop es
+    392	010E  5E						     pop si
+    393	010F  C3						     ret
+    394	0110				     VerifComando endp
+    395
+    396					     ;-----------------------------------------------------------
+    397	0110				     StringToInt proc
+    398					     ; Función	que convierte un string	a un entero
+    399					     ; Recibe:[si] apuntando string a convertir
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 8
+18123226.ASM
+
+
+
+    400					     ; Devuelve:[ax] el	valor en entero
+    401					     ;-----------------------------------------------------------
+    402	0110  53				     push bx
+    403
+    404	0111  33 C0				     xor ax,ax
+    405	0113  33 DB				     xor bx,bx
+    406	0115  33 D2				     xor dx,dx
+    407
+    408	0117  B3 0A				     mov bl,10
+    409	0119					     sigDig:
+    410	0119  8A 14					     mov dl,byte ptr [si]    ;Mueve el caracter	a dl
+    411	011B  80 FA 2D					     cmp dl,'-'
+    412	011E  74 28					     je	finConv				     ;Finaliza si encuentra un guion
+    413	0120  80 FA DD					     cmp dl,221
+    414	0123  74 23					     je	finConv				     ;Finaliza si encuentra un	    +
+    415				     caracter de finalizacion
+    416	0125  80 FA 20					     cmp dl,' '
+    417	0128  74 1E					     je	finConv				     ;Finaliza si es se	encuentra un+
+    418				     espacio
+    419	012A  80 FA 30					     cmp dl,'0'
+    420	012D  7C 0F					     jl	errorConv		     ;Si el ASCII es menor a 48	muestra	    +
+    421				     finaliza
+    422	012F  80 FA 39					     cmp dl,'9'
+    423	0132  7F 0A					     jg	errorConv		     ;Si el caracter ASCII es mayor a 57    +
+    424				     finaliza
+    425	0134  83 EA 30					     sub dx,'0'				     ;Convierto	de ASCII a decimal
+    426	0137  F6 E3					     mul bl				     ;(al*bl)
+    427	0139  02 C2					     add al,dl				     ;(al+dl)
+    428	013B  46					     inc si
+    429							     ;dec cl				     ;Decrementa el contador de	    +
+    430				     caracteres	de la linea de comandos
+    431	013C  EB DB					     jmp sigDig
+    432
+    433	013E					     errorConv:
+    434	013E  BA 0173r					     lea dx,errorConversion	     ;Mueve a [dx] el mensaje de error
+    435	0141  B4 09					     mov ah,09h					     ;Instruccion para	    +
+    436				     imprimir en la salida estandar
+    437	0143  CD 21					     int 21h
+    438	0145  EB 58 90					     jmp fin					     ;Finaliza el programa
+    439
+    440	0148					     finConv:
+    441	0148  8A D0					     mov dl,al
+    442	014A  B4 02					     mov ah,02h
+    443	014C  CD 21					     int 21h
+    444	014E  5B					     pop bx
+    445
+    446	014F  C3					     ret
+    447
+    448	0150				     StringToInt endp
+    449
+    450
+    451					     ;-----------------------------------------------------------
+    452	0150				     MensajeAyuda proc
+    453					     ;Muestra un mensaje de ayuda en la	linea de comandos
+    454					     ;-----------------------------------------------------------
+    455	0150  52				     push dx
+    456
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 9
+18123226.ASM
+
+
+
+    457	0151  BA 0000r				     lea dx,AcercaDe
+    458	0154  E8 FF36				     call PrintStr
+    459
+    460	0157  BA 0049r				     lea dx,Ayuda
+    461	015A  E8 FF30				     call PrintStr
+    462
+    463	015D  BA 0081r				     lea dx,Opciones
+    464	0160  E8 FF2A				     call PrintStr
+    465
+    466	0163  5A				     pop dx
+    467	0164  C3				     ret
+    468	0165				     MensajeAyuda endp
+    469
+    470					     ;-----------------------------------------------------------
+    471	0165				     VerifLinea	proc
+    472					     ; Verifica	si la entrada de comandos
+    473					     ;
+    474					     ;-----------------------------------------------------------
+    475	0165  50				     push ax
+    476	0166  56				     push si
+    477	0167  57				     push di
+    478
+    479	0168  BE 0080				     mov si,80h
+    480	016B  32 ED				     xor ch,ch
+    481	016D  26: 8A 0C				     mov cl,byte ptr es:[si]
+    482	0170  46				     inc si
+    483
+    484	0171  80 F9 00				     cmp cl,0
+    485	0174  74 02				     je	noEntrada
+    486	0176  75 06				     jne entrada
+    487
+    488	0178					     noEntrada:
+    489	0178  E8 FFD5					     call MensajeAyuda
+    490	017B  EB 22 90					     jmp fin
+    491
+    492	017E					     entrada:
+    493	017E  E8 FF15					     call VerifComando
+    494
+    495	0181  58				     pop ax
+    496	0182  5E				     pop si
+    497	0183  5F				     pop di
+    498
+    499	0184  C3				     ret
+    500	0185				     VerifLinea	endp
+    501
+    502	0185				     main:
+    503	0185  8C D8				     mov ax, ds					     ;Mueve a ax lo que	tiene en el +
+    504				     data segment
+    505	0187  8E C0				     mov es, ax					     ;Mueve a es lo que	tiene en ax
+    506
+    507	0189  B8 0000s				     mov ax, pila			     ;Mueve lo que tiene en la pila a ax
+    508	018C  8E D0				     mov ss, ax					     ;Mueve lo que tiene en ax a la +
+    509				     pila
+    510
+    511	018E  B8 0000s				     mov ax, datos			     ;Mueve lo que tiene en datos a ax
+    512	0191  8E D8				     mov ds, ax					     ;Mueve lo que tiene el datos a +
+    513				     ax
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 10
+18123226.ASM
+
+
+
+    514
+    515						     ;lea dx,Opciones
+    516						     ;call PrintStr
+    517	0193  BF 01B7r				     lea di,comando
+    518	0196  E8 FEC8				     call CopiarComando
+    519	0199  BE 01B7r				     lea si,comando
+    520	019C  E8 FEF7				     call VerifComando
+    521
+    522
+    523
+    524	019F				     fin:
+    525	019F  B8 4C00				     mov ax, 4C00h
+    526	01A2  CD 21				     int 21h
+    527
+    528
+    529	01A4			     codigo ends
+    530				     end main
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 11
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "03/14/20"
+??FILENAME		Text   "18123226"
+??TIME			Text   "21:27:08"
+??VERSION		Number 0314
+@CPU			Text   0101H
+@CURSEG			Text   CODIGO			   #43	#118  #122
+@FILENAME		Text   18123226
+@WORDSIZE		Text   2			   #43	#118  #122
+ACERCADE		Byte   DATOS:0000		   #44	457
+AYUDA			Byte   DATOS:0049		   #57	460
+BASENUM1		Byte   DATOS:0197		   #110	 131
+BASENUM2		Byte   DATOS:019F		   #111
+BASERES			Byte   DATOS:018F		   #109	 344
+CICLONUM		Near   CODIGO:0035		   157	#169  185
+COMANDO			Byte   DATOS:01B7		   #114	 517  519
+COPIARCOMANDO		Near   CODIGO:0061		   #210	 518
+COPIARNUMS		Near   CODIGO:0000		   #125	 363
+ENTRADA			Near   CODIGO:017E		   486	#492
+ERRORCOMANDO		Near   CODIGO:00F3		   285	319  329  336  339  350	 353  359  #368
+ERRORCONV		Near   CODIGO:013E		   420	423  #433
+ERRORCONVERSION		Byte   DATOS:0173		   #104	 434
+ERRORMSJ		Byte   DATOS:016D		   #103	 190  369
+ERRORNUMS		Near   CODIGO:0050		   130	138  140  143  150  163	 166  #189
+FIN			Near   CODIGO:019F		   193	233  372  376  438  490	 #524
+FINCONV			Near   CODIGO:0148		   412	414  417  #440
+FINCOP			Near   CODIGO:005A		   171	186  #195
+FINVERIF		Near   CODIGO:010B		   366	#385
+LETRAOP			Near   CODIGO:0102		   301	306  311  316  #378
+MAIN			Near   CODIGO:0185		   #502	 530
+MENSAJEAYUDA		Near   CODIGO:0150		   375	#452  489
+MOSTRARAYUDA		Near   CODIGO:00FC		   231	294  #374
+NOARG			Near   CODIGO:0076		   224	#230
+NOENTRADA		Near   CODIGO:0178		   485	#488
+NUM1			Byte   DATOS:01A7		   #112	 146
+NUM2			Byte   DATOS:01AF		   #113
+OPCIONES		Byte   DATOS:0081		   #66	463
+OPERACION		Byte   DATOS:0187		   #108	 379
+PRINTSTR		Near   CODIGO:008D		   #255	 371  458  461	464
+SIGCARACT		Near   CODIGO:007C		   228	#235  241
+SIGDIG			Near   CODIGO:0119		   #409	 431
+STRINGTOINT		Near   CODIGO:0110		   134	342  #397
+VERIFBASE		Near   CODIGO:00C2		   #322	 383
+VERIFBASENUM1		Near   CODIGO:0008		   #133
+VERIFCOMANDO		Near   CODIGO:0096		   #273	 493  520
+VERIFLETRA		Near   CODIGO:002B		   153	#160
+VERIFLINEA		Near   CODIGO:0165		   #471
+VERIFNUM		Near   CODIGO:001E		   #147
+VERIFNUMS		Near   CODIGO:00E7		   #356
+VERIFOPERACION		Near   CODIGO:009A		   #281
+Turbo Assembler	 Version 3.2	    03/14/20 21:27:09	    Page 12
+Symbol Table
+
+
+
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODIGO			16  01A4 Para	none		   #122	 123
+DATOS			16  01C7 Para	none		   #43	123  511
+PILA			16  0200 Para	Stack	STACK	   #118	 123  507
+

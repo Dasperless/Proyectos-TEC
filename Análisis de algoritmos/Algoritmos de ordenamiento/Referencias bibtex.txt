@@ -1,0 +1,4 @@
+@article{figueroamaquina,
+  title={Una m{\'a}quina de Turing para el algoritmo “Quicksort”},
+  author={Figueroa, Edgar Fuentes}
+}

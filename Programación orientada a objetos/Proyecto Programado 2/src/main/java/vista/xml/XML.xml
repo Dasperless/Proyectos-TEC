@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><XML>
+    <Ciudad>
+        <Fondo>./src/main/java/vista/recursos/Escenario/DefaultBackground.png</Fondo>
+    </Ciudad>
+    <Heroes>
+        <Heroe>
+            <IdentidadSecreta>Peter Parker</IdentidadSecreta>
+            <NombreDeHeroe>Spider Man</NombreDeHeroe>
+            <Archienemigo>Venom</Archienemigo>
+            <Imagen>./src/main/java/vista/recursos/sprites/ImgDefHeroe.png</Imagen>
+            <ImagenDeAtaque>./src/main/java/vista/recursos/sprites/ImgDefAtqHeroe.png</ImagenDeAtaque>
+            <EventosGanados>0</EventosGanados>
+            <EventosPerdidos>0</EventosPerdidos>
+        </Heroe>
+    </Heroes>
+    <AntiHeroes/>
+    <Villanos>
+        <Villano>
+            <IdentidadSecreta>Eddie Brock</IdentidadSecreta>
+            <NombreDeVillano>Venom</NombreDeVillano>
+            <TipoVillano>Social</TipoVillano>
+            <Imagen>./src/main/java/vista/recursos/sprites/ImgDefVillano.png</Imagen>
+            <ImagenDeAtaque>./src/main/java/vista/recursos/sprites/ImgDefAtqVillano.png</ImagenDeAtaque>
+            <EventosGanados>0</EventosGanados>
+            <EventosPerdidos>0</EventosPerdidos>
+        </Villano>
+    </Villanos>
+</XML>

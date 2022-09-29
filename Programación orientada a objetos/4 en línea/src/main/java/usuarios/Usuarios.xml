@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Usuarios>    
+    <Usuario>  
+        <Contraseña>189sdaF3o3</Contraseña>  
+        <Nombre>Dario</Nombre>
+        <Apellido>Vargas</Apellido>
+        <Correo>dariovm13@gmail.com</Correo>
+        <PartidasGanadas>0</PartidasGanadas>
+        <PartidasEmpatadas>0</PartidasEmpatadas>
+        <PartidasPerdidas>0</PartidasPerdidas>  
+    </Usuario>
+</Usuarios>
