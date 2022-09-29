@@ -1,0 +1,3 @@
+OWTV09K,4/Jun/2018,AAE,ABJ,0100,0900,115,432,65432456,Julio,Vega,Navas,Colombiano
+E7AT4,2/Oct/2018,SJO,ABM,0400,0900,120,100,117530565,Darío,Vargas,Montoya,Costarricense
+PLZ83PBE,1/Ene/2018,AAE,ABJ,0100,0900,117,321,ferwe,fewfew,,rew,
