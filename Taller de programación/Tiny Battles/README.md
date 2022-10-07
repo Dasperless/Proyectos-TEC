@@ -1,13 +1,17 @@
 # Introducción
+<p align="justify"> 
 El desarrollo de juegos es una de las herramientas más utilizadas en el proceso de aprendizaje de programación. En esta tarea se deberá implementar el juego de “Guerra de Soldados”, utilizando estructuras de datos como matrices, listas, vectores, funcionalidad del random, generación de interfaces gráficas, entre otros. Se espera que el estudiante (al igual que en los proyectos I y II) desarrolle habilidades en investigación y pueda llevar ese conocimiento a la práctica, y de esta forma, cumplir con los requerimientos que se detallan en esta especificación.
+</p>
 
 # Descripción del programa
 El juego de Guerra de Soldados presenta elementos como:
 - **Soldados:** los cuales presentan 4 habilidades mínimas: Fuerza, Inteligencia, Defensa y ataque (se pueden agregar más, si lo desean). Cada escuadrón tendrá 10 soldados.
 - **Campo de batalla:** lo cual es una matriz donde los soldados se podrán desplazar de forma aleatoria. Cabe destacar que el campo de batalla debe presentar elementos como árboles, edificios, autos, lagos, etc.
 
+<p align="justify"> 
 La matriz bidimensional (Campo de batalla) tiene dimensiones definidas por el creador del juego, considerando la racionalidad con respecto a la cantidad de soldados. Una celda o casilla puede ser ocupada a los sumo por dos soldados de diferente escuadrón, la forma interna de representar los elementos en el campo de batalla es libre para el desarrollador.
 A continuación se muestra un ejemplo meramente ilustrativo (el diseño e implementación es libre para el desarrollador) del campo de batalla.
+</p>
 
 <p align = "center">
     <img src = "https://user-images.githubusercontent.com/34630050/194616628-78235c85-5f49-42bb-b089-221c4c2eaf1d.png">
